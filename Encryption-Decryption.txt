@@ -15,6 +15,7 @@ class Project {
         switch (method) {
             case "shift":
                 if (mode.equals("enc")) {
+                //Ha nem lett megadva a bemeneti fájl, vagy az adat meg lett adva manuálisan
                     if (Main.inData.equals("") || !data.equals("")) {
                         Shift.encode(data, key);
                     } else {
@@ -80,11 +81,13 @@ class Shift {
         for (int i = 0; i < str.length(); i++) {
             for (int j = 0; j < abc.length(); j++) {
                 currentChar = str.charAt(i);
+                //Ha az aktuális karakter nagybetű
                 if (currentChar > 64 && currentChar < 91) {
                     abc = abc.toUpperCase();
                 } else {
                     abc = abc.toLowerCase();
                 }
+                Ha az aktuális karakter nincs a megadott abc-ben
                 if (currentChar < 65) {
                     result = result + currentChar;
                     break;
@@ -113,6 +116,7 @@ class Shift {
                     break;
                 }
                 if (str.substring(i, i + 1).equals(abc.substring(j, j + 1))) {
+                //Ha az eltolás miatt nem fér bele az abc hosszúságába (lásd -4 % 26 == -4)
                     int fract = (j - mod) % abc.length() < 0 ? 26 + (j - mod) % abc.length() : (j - mod) % abc.length();
                     result = result + abc.substring(fract, fract + 1);
                     break;
